@@ -23,10 +23,11 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
     required this.getRandomNumberTrivia,
     required this.inputConverter,
   }) : super(Empty()) {
-    on<GetTriviaForConcreteNumber>(_onGetTriviaForConcreteNumberEvent);
+    on<GetTriviaForConcreteNumber>(_onGetTriviaForConcreteNumberEvent
+        as EventHandler<GetTriviaForConcreteNumber, NumberTriviaState>);
   }
-  _onGetTriviaForConcreteNumberEvent(
-      GetConcreteNumberTrivia event, Emitter<NumberTriviaState> emit) {
+  Future<void> _onGetTriviaForConcreteNumberEvent(
+      GetConcreteNumberTrivia event, Emitter<NumberTriviaState> emit) async {
     final inputEither =
         inputConverter.stringToUnsignedInteger(event.repository as String);
 
